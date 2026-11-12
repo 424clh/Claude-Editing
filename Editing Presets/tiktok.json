@@ -1,0 +1,95 @@
+{
+  "name": "TikTok and Reels",
+  "description": "Strong hook, energetic jump cuts, expressive word-by-word pop captions, occasional SFX, punchy zooms - without over-editing.",
+  "target_duration": 30,
+  "output": {
+    "width": 1080,
+    "height": 1920,
+    "fps": 30,
+    "crf": 18,
+    "x264_preset": "medium",
+    "audio_bitrate": "192k"
+  },
+  "framing": {
+    "mode": "fill",
+    "face_bias_y": 0.38
+  },
+  "cuts": {
+    "max_pause": 0.3,
+    "pad_before": 0.06,
+    "pad_after": 0.1,
+    "lead_in": 0.05,
+    "tail_out": 0.3,
+    "remove_fillers": true,
+    "remove_retakes": true,
+    "phrase_gap": 0.5,
+    "min_segment": 0.25,
+    "filler_words": [
+      "um",
+      "umm",
+      "uh",
+      "uhh",
+      "erm",
+      "er",
+      "ah",
+      "hmm",
+      "mm",
+      "hm",
+      "m",
+      "h",
+      "mhm"
+    ]
+  },
+  "zoom": {
+    "style": "punch",
+    "punch_scale": 1.15,
+    "every_n_cuts": 2
+  },
+  "color": {
+    "contrast": 1.08,
+    "brightness": 0.0,
+    "saturation": 1.15,
+    "gamma": 1.0,
+    "warmth": 0.0,
+    "sharpen": 0.4,
+    "lut": null
+  },
+  "audio": {
+    "highpass": 90,
+    "denoise": true,
+    "denoise_floor": -28,
+    "deess": false,
+    "compress": true,
+    "loudness": -13
+  },
+  "captions": {
+    "enabled": true,
+    "style": "pop",
+    "font": "Arial Black",
+    "bold": true,
+    "size": 92,
+    "primary": "#FFFFFF",
+    "highlight": "#2EF26B",
+    "outline": "#000000",
+    "outline_width": 6,
+    "shadow": 2,
+    "position": "lower",
+    "margin_v": 700,
+    "max_words": 2,
+    "uppercase": true,
+    "box": false,
+    "hook_seconds": 2.5
+  },
+  "transitions": {
+    "type": "cut",
+    "duration": 0.2
+  },
+  "music": {
+    "volume_db": -20,
+    "duck": true
+  },
+  "sfx": {
+    "volume_db": -8,
+    "suggest_on_zoom_cuts": true
+  }
+}

@@ -1,0 +1,29 @@
+# Media stays on your Mac, not in git (too large, and private)
+*.mp4
+*.mov
+*.m4v
+*.mkv
+*.webm
+*.avi
+*.mts
+*.wav
+*.mp3
+*.m4a
+*.aac
+*.flac
+*.aiff
+*.heic
+Raw Footage/**
+Audio and Music/**
+Sound Effects/**
+Graphics and Overlays/**
+Brand Assets/**
+Editing Projects/**
+Finished Videos/**
+Transcripts/**
+Editing Presets/references/**
+!**/.gitkeep
+!Brand Assets/fonts/
+.venv/
+__pycache__/
+.DS_Store

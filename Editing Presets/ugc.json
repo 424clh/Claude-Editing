@@ -1,0 +1,93 @@
+{
+  "name": "UGC Product Review",
+  "description": "Natural, authentic, relatable. Clean captions, product close-ups, subtle zooms, professional audio.",
+  "target_duration": 30,
+  "output": {
+    "width": 1080,
+    "height": 1920,
+    "fps": 30,
+    "crf": 18,
+    "x264_preset": "medium",
+    "audio_bitrate": "192k"
+  },
+  "framing": {
+    "mode": "fill",
+    "face_bias_y": 0.4
+  },
+  "cuts": {
+    "max_pause": 0.45,
+    "pad_before": 0.08,
+    "pad_after": 0.14,
+    "lead_in": 0.15,
+    "tail_out": 0.4,
+    "remove_fillers": true,
+    "remove_retakes": true,
+    "phrase_gap": 0.6,
+    "min_segment": 0.3,
+    "filler_words": [
+      "um",
+      "umm",
+      "uh",
+      "uhh",
+      "erm",
+      "er",
+      "ah",
+      "hmm",
+      "mm",
+      "hm",
+      "m",
+      "h",
+      "mhm"
+    ]
+  },
+  "zoom": {
+    "style": "punch",
+    "punch_scale": 1.08,
+    "every_n_cuts": 2
+  },
+  "color": {
+    "contrast": 1.04,
+    "brightness": 0.01,
+    "saturation": 1.06,
+    "gamma": 1.0,
+    "warmth": 0.02,
+    "sharpen": 0.3,
+    "lut": null
+  },
+  "audio": {
+    "highpass": 80,
+    "denoise": true,
+    "denoise_floor": -28,
+    "deess": false,
+    "compress": true,
+    "loudness": -14
+  },
+  "captions": {
+    "enabled": true,
+    "style": "clean",
+    "font": "Helvetica Neue",
+    "bold": true,
+    "size": 76,
+    "primary": "#FFFFFF",
+    "highlight": "#FFD84D",
+    "outline": "#000000",
+    "outline_width": 4,
+    "shadow": 1,
+    "position": "lower",
+    "margin_v": 560,
+    "max_words": 4,
+    "uppercase": false,
+    "box": false
+  },
+  "transitions": {
+    "type": "cut",
+    "duration": 0.25
+  },
+  "music": {
+    "volume_db": -22,
+    "duck": true
+  },
+  "sfx": {
+    "volume_db": -10
+  }
+}

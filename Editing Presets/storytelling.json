@@ -1,0 +1,90 @@
+{
+  "name": "Animated Storytelling",
+  "description": "Cinematic pacing, gentle dips between scenes, slow push-ins, dialogue subtitles, warm family-friendly music bed.",
+  "target_duration": 60,
+  "output": {
+    "width": 1080,
+    "height": 1920,
+    "fps": 30,
+    "crf": 17,
+    "x264_preset": "medium",
+    "audio_bitrate": "192k"
+  },
+  "framing": {
+    "mode": "blur",
+    "face_bias_y": 0.45
+  },
+  "cuts": {
+    "max_pause": 0.9,
+    "pad_before": 0.15,
+    "pad_after": 0.3,
+    "lead_in": 0.3,
+    "tail_out": 0.6,
+    "remove_fillers": true,
+    "remove_retakes": true,
+    "phrase_gap": 0.8,
+    "min_segment": 0.5,
+    "filler_words": [
+      "um",
+      "umm",
+      "uh",
+      "uhh",
+      "erm",
+      "hm",
+      "m",
+      "h",
+      "mhm"
+    ]
+  },
+  "zoom": {
+    "style": "slow",
+    "slow_amount": 0.06
+  },
+  "color": {
+    "contrast": 1.03,
+    "brightness": 0.0,
+    "saturation": 1.05,
+    "gamma": 1.0,
+    "warmth": 0.03,
+    "sharpen": 0.0,
+    "vignette": true,
+    "lut": null
+  },
+  "audio": {
+    "highpass": 60,
+    "denoise": false,
+    "compress": true,
+    "loudness": -16
+  },
+  "captions": {
+    "enabled": true,
+    "style": "dialogue",
+    "font": "Avenir Next",
+    "bold": true,
+    "size": 64,
+    "primary": "#FFFFFF",
+    "highlight": "#FFE7A3",
+    "outline": "#1A1A1A",
+    "outline_width": 3,
+    "shadow": 1,
+    "position": "lower",
+    "margin_v": 300,
+    "max_words": 10,
+    "uppercase": false,
+    "box": true,
+    "box_color": "#000000",
+    "box_opacity": 0.45
+  },
+  "transitions": {
+    "type": "dip_black",
+    "duration": 0.5,
+    "between": "sources"
+  },
+  "music": {
+    "volume_db": -18,
+    "duck": true
+  },
+  "sfx": {
+    "volume_db": -12
+  }
+}
