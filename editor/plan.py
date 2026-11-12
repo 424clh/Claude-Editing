@@ -208,6 +208,8 @@ def build_plan(pdir: Path, preset_name: str | None = None, target: float | None 
         "notes": notes,
     }
     out = pdir / "edit_plan.json"
+    if out.exists() and load_json(out).get("voiceover"):
+        plan["voiceover"] = load_json(out)["voiceover"]  # re-planning keeps the narration
     if out.exists():
         n = len(list((pdir / "history").glob("edit_plan_*.json"))) + 1
         shutil.copy2(out, pdir / "history" / f"edit_plan_{n:03d}.json")

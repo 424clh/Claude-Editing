@@ -7,6 +7,7 @@
   plan PROJECT [--preset P]     auto-cut pauses / fillers / retakes -> edit_plan.json
   render PROJECT [--final]      preview (half-res, fast) or final 1080x1920 export
   edit VIDEO --preset P         all of the above in one go (stops at a preview)
+  voiceover PROJECT AUDIO       add narration (e.g. your ElevenLabs voice clone)
   frames FILE_OR_PROJECT        contact sheet of thumbnails to look at
   analyze-ref VIDEO             measure a reference video's editing style
   presets                       list presets
@@ -99,6 +100,12 @@ def cmd_edit(a):
     render(p, "final" if a.final else "preview")
 
 
+def cmd_voiceover(a):
+    from .voiceover import add_voiceover
+    add_voiceover(project_dir(a.project), a.audio, a.at, a.keep_original_db, a.volume_db,
+                  a.language, a.model, a.script)
+
+
 def cmd_frames(a):
     from .project import frames
     target = Path(a.target)
@@ -149,6 +156,15 @@ def main():
     p = sp.add_parser("edit"); p.add_argument("files", nargs="+"); p.add_argument("--preset", default="ugc")
     p.add_argument("--name"); p.add_argument("--target", type=float); p.add_argument("--final", action="store_true")
     tr_opts(p); p.set_defaults(fn=cmd_edit)
+    p = sp.add_parser("voiceover", help="add a narration/voiceover track")
+    p.add_argument("project"); p.add_argument("audio")
+    p.add_argument("--at", type=float, default=0.0, help="start time in the edited video (s)")
+    p.add_argument("--keep-original-db", type=float, default=None,
+                   help="keep original audio underneath at this level, e.g. -18 (default: mute)")
+    p.add_argument("--volume-db", type=float, default=0.0)
+    p.add_argument("--script", help="exact script text (or a .txt file) so captions are spelled right")
+    tr_opts(p)
+    p.set_defaults(fn=cmd_voiceover)
     p = sp.add_parser("frames"); p.add_argument("target"); p.add_argument("--every", type=float, default=2.0)
     p.add_argument("--at", help="comma-separated seconds for single stills"); p.add_argument("--source", type=int)
     p.add_argument("--out"); p.set_defaults(fn=cmd_frames)

@@ -12,6 +12,10 @@ language, keep technical detail out of the way, and do the technical work yourse
 3. Only use music/SFX the user provided. Never download copyrighted assets.
 4. Don't say a feature works unless it has been rendered and checked.
 5. Read `EDITING_STYLE.md` before planning an edit, and respect it.
+6. **AI voice / voice clones:** only the user's OWN cloned voice (or a voice they have written
+   permission to use, or a stock/designed voice). Never imitate a real person. Voiceover
+   scripts must state only the user's real experiences and claims. Remind the user to turn on
+   the platform's "AI-generated content" label when a realistic AI voice is used.
 
 ## Tool: `./vedit`
 | Step | Command |
@@ -24,6 +28,7 @@ language, keep technical detail out of the way, and do the technical work yourse
 | Final 1080×1920 export | `./vedit render <project> --final` (copied to `Finished Videos/`) |
 | Look at footage | `./vedit frames <project> [--source 0] [--every 1]` or `--at 3.5,7` then Read the jpg |
 | Reference analysis | `./vedit analyze-ref <video>` |
+| Voiceover / narration | `./vedit voiceover <project> vo.mp3 --script "exact text" [--at 0.5] [--keep-original-db -18]` |
 
 `<project>` is the folder name in `Editing Projects/` (e.g. `2026-11-12_my-video`).
 
@@ -39,6 +44,10 @@ Edit this JSON to make creative decisions, then re-render. Fields:
   "mode": "full"|"pip", "from": 0}]`. `at` is in **output** seconds. The voice continues underneath.
 - `music`: `{"file": "Audio and Music/track.mp3", "volume_db": -20, "duck": true, "fade_out": 1.5}`
 - `sfx`: `[{"file": "Sound Effects/whoosh.wav", "at": 3.1, "volume_db": -8}]`
+- `voiceover`: added by `./vedit voiceover`: `file`, `at` (output s), `volume_db`,
+  `original_volume_db` (null = mute original), `words` (timed, used for captions),
+  `caption_original` (true = also caption the original speech). Survives re-planning.
+  If narration is longer than the footage the last frame holds; add clips/B-roll instead.
 - `hook_text`: short on-screen title for the first seconds (user's own words) or null.
 - `overrides`: per-video tweaks on top of the preset: `captions`, `color`, `audio`,
   `output`, `framing` (e.g. `{"captions": {"size": 80}}`).
@@ -51,3 +60,14 @@ Output time for a segment = sum of the durations of the segments before it. Use
 - `./vedit frames <project>` on the render, then Read the sheet: check captions are readable
   and not covered by app UI, zooms aren't cutting off heads, and nothing is black or frozen.
 - Mention anything you couldn't verify (e.g. how it sounds: you can't listen).
+
+## AI voiceover with ElevenLabs (connected)
+1. The user's voice clone is created by THEM in the ElevenLabs app (Voices -> add a new voice ->
+   Instant Voice Clone, from about 1-2 min of clean recording of their own voice; paid plan).
+   The connector can't clone from a sample.
+2. Find it: `creative_list_voices` (search their clone's name). Never guess voice ids.
+3. Write the script WITH the user (their words, their real experience). Confirm before generating:
+   generation spends their credits, and each call gives 2 takes; never call it again to retry.
+4. `creative_generate_speech` -> poll `creative_get_flow_run_status` -> download the take they pick
+   into the project folder (not into protected folders), then
+   `./vedit voiceover <project> <file> --script "<exact script>"` and render.

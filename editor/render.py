@@ -119,6 +119,14 @@ def render(pdir: Path, kind: str = "preview") -> Path:
     fc.append("".join(f"{v}{a}" for v, a in zip(vlabels, alabels))
               + f"concat=n={len(tl)}:v=1:a=1[vcat][acat]")
     vcur, acur = "[vcat]", "[acat]"
+    vo = plan.get("voiceover")
+    if vo:
+        vo_end = float(vo.get("at", 0)) + float(vo["duration"])
+        if vo_end > total:  # narration longer than footage: hold the last frame
+            ext = vo_end - total + 0.4
+            fc.append(f"[vcat]tpad=stop_mode=clone:stop_duration={ext:.3f}[vext]")
+            fc.append(f"[acat]apad=pad_dur={ext:.3f}[aext]")
+            vcur, acur, total = "[vext]", "[aext]", total + ext
 
     # ---- B-roll: {"file", "at" (output seconds), "duration", "from" (seconds into clip), "mode": full|pip}
     for b, br in enumerate(plan.get("broll", [])):
@@ -192,6 +200,15 @@ def render(pdir: Path, kind: str = "preview") -> Path:
     if ach:
         fc.append(f"{acur}{','.join(ach)}[avox]")
         acur = "[avox]"
+    if vo:
+        odb = vo.get("original_volume_db")
+        i = add_input("-i", str(_resolve(vo["file"], pdir)))
+        ms = int(float(vo.get("at", 0)) * 1000)
+        fc.append(f"{acur}volume={'0' if odb is None else f'{odb}dB'}[aorig]")
+        fc.append(f"[{i}:a]aresample=48000,aformat=sample_fmts=fltp:channel_layouts=stereo,"
+                  f"volume={vo.get('volume_db', 0)}dB,adelay={ms}|{ms},apad,atrim=duration={total:.3f}[avo]")
+        fc.append("[aorig][avo]amix=inputs=2:duration=first:normalize=0[avoice]")
+        acur = "[avoice]"
     mixes = []
     mus = plan.get("music")
     if mus:

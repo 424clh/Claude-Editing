@@ -75,12 +75,29 @@ voice containing pauses, "um/uh" and a restarted sentence):
 - ✅ B-roll (photos with gentle zoom, or video clips), hook title
 - ✅ Colour adjustment, voice clean-up, music with automatic ducking, sound effects
 - ✅ Loudness normalised to −14 LUFS; H.264/AAC MP4, 30 fps
+- ✅ Voiceover/narration track: captions follow your exact script, original audio muted or
+  kept quietly underneath, music ducks under it (tested with a free offline voice, not yet
+  with an ElevenLabs clone)
 - ✅ Reference video analysis (cut rate incl. jump cuts, pause lengths, loudness)
 
 **Not yet tested with real camera footage of a person.** Do one run with a short clip of
 your own and check the result. Things that can only be checked on real footage: face
 framing after the vertical crop, iPhone HDR colour conversion, and how the audio clean-up
 sounds on your microphone.
+
+## AI clone voiceover (ElevenLabs)
+1. **Make your clone (once, in the ElevenLabs app or website):** Voices → add a new voice →
+   *Instant Voice Clone*. Record or upload 1–2 minutes of just you talking, in a quiet room.
+   Cloning needs a paid ElevenLabs plan (the cheapest paid tier includes it), and each
+   voiceover uses credits from your plan.
+2. **Tell Claude:** "Add a voiceover in my cloned voice saying: …". Claude finds your clone,
+   confirms before spending credits, generates two takes for you to pick from, and drops it
+   into the edit with captions that match your script word for word.
+3. Only clone **your own** voice. When the voice sounds realistic, switch on TikTok's /
+   Instagram's "AI-generated" label when posting.
+
+Free alternative: the editor works with any narration file, so you can record your own
+voiceover on your phone (Voice Memos) and send it instead.
 
 ## Optional extras (all free unless noted)
 - **DaVinci Resolve** (free): for manual touch-ups after Claude's cut.

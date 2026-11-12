@@ -30,6 +30,8 @@ Arguments: $ARGUMENTS
    - Product close-ups: when the product is shown/named, set `zoom` ~1.3 and `focus` toward it,
      or add B-roll from `Graphics and Overlays/`/`Raw Footage/` if the user supplied some.
    - Music/SFX only from `Audio and Music/` and `Sound Effects/`. If empty, say so and skip.
+   - Voiceover requested? Follow "AI voiceover with ElevenLabs" in CLAUDE.md: the user's own
+     clone only, the user's own words, confirm before spending credits, `./vedit voiceover ... --script`.
 7. **Show the plan** to the user in plain words: final length, what was cut (counts plus a
    few examples), hook, close-ups, B-roll, music. Then render.
 8. **Render a preview:** `./vedit render <project>`. Then `./vedit frames <project>` and Read

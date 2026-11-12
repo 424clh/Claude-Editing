@@ -107,6 +107,12 @@ Format: Layer, Start, End, Style, Name, MarginL, MarginR, MarginV, Effect, Text
 
     if cfg.get("enabled", True):
         words = output_words(plan, transcript, fps)
+        vo = plan.get("voiceover")
+        if vo:
+            at = float(vo.get("at", 0))
+            vw = [{"w": w["w"], "s": at + w["s"], "e": at + w["e"], "seg": 0} for w in vo["words"]]
+            # Captions follow the narration; set "caption_original": true to caption both
+            words = sorted(words + vw, key=lambda w: w["s"]) if vo.get("caption_original") else vw
         if style == "dialogue":
             for ch in _chunks(words, cfg.get("max_words", 12), 0.7):
                 txt = _clean(" ".join(w["w"] for w in ch))

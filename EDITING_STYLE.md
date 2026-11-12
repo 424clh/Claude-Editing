@@ -50,6 +50,13 @@ go here; the exact numbers live in `Editing Presets/*.json`. Tell Claude somethi
 - **Framing:** non-vertical clips sit on a blurred version of themselves instead of being cropped.
 - **Music:** warm, gentle bed under dialogue (ducked), fading out at the end.
 
+## AI voiceover
+
+- Only my own cloned voice (made by me in ElevenLabs), or a stock voice, never anyone else's.
+- Scripts say only things I really experienced or believe. Same rules as filmed footage.
+- Captions use my exact script. Original audio is muted under narration unless I ask for it quietly underneath.
+- Turn on TikTok/Instagram's "AI-generated" label when the AI voice sounds realistic.
+
 ## Reference videos
 
 Drop a reference into `Raw Footage/references/` and ask Claude to "analyse this reference".

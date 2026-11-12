@@ -168,3 +168,19 @@ def _export(pdir: Path, tr: dict) -> None:
     (TRANSCRIPTS / f"{pdir.name}.txt").write_text("\n".join(txt) + "\n")
     (TRANSCRIPTS / f"{pdir.name}.srt").write_text("\n".join(srt))
     log(f"  Transcript saved: Transcripts/{pdir.name}.txt (+ .srt)")
+
+
+def transcribe_file(media: Path, workdir: Path, model: str = "small",
+                    language: str | None = None) -> tuple[str, list[dict]]:
+    """Transcribe one audio/video file -> (engine, words). Used for voiceovers."""
+    wav = workdir / "_tmp_vo.wav"
+    _extract_audio(media, wav)
+    eng = None
+    try:
+        eng, lang, words, segs = _whisperx(wav, model, language, None)
+    except (ImportError, _AlignFailed):
+        pass
+    if eng is None:
+        eng, lang, words, segs = _faster_whisper(wav, model, language, None)
+    wav.unlink(missing_ok=True)
+    return eng, [w for w in words if w["w"]]
